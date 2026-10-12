@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "stationery-shop",
-    "slug": "stationery-shop",
+    "name": "Аптека",
+    "slug": "pharmacy-catalog",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

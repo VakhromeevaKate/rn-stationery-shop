@@ -1,66 +1,8 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CartLine } from '../types/product';
 import { useCartStore } from '../stores/cartStore';
-import { useState } from 'react';
-
 export default function CartItem({ line }: { line: CartLine }) {
-  const [qty, setQty] = useState<number>(line.quantity);
-  const remove = useCartStore((s) => s.remove);
-
-  const sum = line.product.price * qty;
-
-  return (
-    <View style={styles.row}>
-      <Image source={{ uri: line.product.image_url }} style={styles.image} />
-      <View style={styles.info}>
-        <Text style={styles.name} numberOfLines={2}>
-          {line.product.name}
-        </Text>
-        <Text style={styles.price}>
-          {line.product.price} ₽ × {qty} = {sum} ₽
-        </Text>
-
-        <View style={styles.controls}>
-          <Pressable style={styles.qtyBtn} onPress={() => setQty(qty - 1)}>
-            <Text style={styles.qtyText}>−</Text>
-          </Pressable>
-          <Text style={styles.qty}>{qty}</Text>
-          <Pressable style={styles.qtyBtn} onPress={() => setQty(qty + 1)}>
-            <Text style={styles.qtyText}>+</Text>
-          </Pressable>
-          <Pressable onPress={() => remove(line.product.id)} style={styles.remove}>
-            <Text style={styles.removeText}>Удалить</Text>
-          </Pressable>
-        </View>
-      </View>
-    </View>
-  );
+ const { increment, decrement, remove } = useCartStore();
+ return <View style={styles.row}><View style={styles.icon}><Text style={styles.plus}>✚</Text></View><View style={styles.info}><Text style={styles.name}>{line.product.name}</Text><Text style={styles.price}>{line.product.price.toLocaleString('ru-RU')} ₽ за шт.</Text><View style={styles.controls}><Pressable style={styles.qtyBtn} onPress={() => decrement(line.product.id)}><Text style={styles.qtyText}>−</Text></Pressable><Text style={styles.qty}>{line.quantity}</Text><Pressable style={styles.qtyBtn} onPress={() => increment(line.product.id)}><Text style={styles.qtyText}>+</Text></Pressable><Text style={styles.sum}>{(line.product.price*line.quantity).toLocaleString('ru-RU')} ₽</Text></View><Pressable onPress={() => remove(line.product.id)}><Text style={styles.remove}>Удалить</Text></Pressable></View></View>;
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    padding: 12,
-    marginHorizontal: 12,
-    marginVertical: 6,
-    backgroundColor: '#fff',
-    borderRadius: 12,
-  },
-  image: { width: 72, height: 72, borderRadius: 8, backgroundColor: '#f2f2f2' },
-  info: { flex: 1, marginLeft: 12 },
-  name: { fontSize: 14, fontWeight: '600', marginBottom: 4 },
-  price: { fontSize: 13, color: '#1e88e5', fontWeight: '600', marginBottom: 8 },
-  controls: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  qtyBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#eef3fa',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  qtyText: { fontSize: 18, fontWeight: '700', color: '#1e88e5' },
-  qty: { fontSize: 16, fontWeight: '700', minWidth: 24, textAlign: 'center' },
-  remove: { marginLeft: 'auto' },
-  removeText: { color: '#e53935', fontSize: 13 },
-});
+const styles=StyleSheet.create({row:{flexDirection:'row',padding:13,marginHorizontal:12,marginVertical:5,backgroundColor:'#fff',borderRadius:15,borderWidth:1,borderColor:'#e7efea'},icon:{width:55,height:55,borderRadius:12,backgroundColor:'#e7f5ed',alignItems:'center',justifyContent:'center'},plus:{fontSize:27,color:'#087f5b'},info:{flex:1,marginLeft:12},name:{fontSize:14,fontWeight:'800',color:'#193d31'},price:{fontSize:11,color:'#7b9087',marginTop:4},controls:{flexDirection:'row',alignItems:'center',gap:8,marginTop:8},qtyBtn:{width:27,height:27,borderRadius:9,backgroundColor:'#e7f5ed',alignItems:'center',justifyContent:'center'},qtyText:{fontSize:18,fontWeight:'800',color:'#087f5b'},qty:{fontSize:14,fontWeight:'800',color:'#193d31'},sum:{marginLeft:'auto',fontSize:14,fontWeight:'800',color:'#087f5b'},remove:{color:'#b54141',fontSize:11,marginTop:7}});

@@ -11,12 +11,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function RootNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#f4f8f6' }, headerTintColor: '#173d30', headerTitleStyle: { fontWeight: '800' } }}>
         <Stack.Screen
           name="ProductList"
           component={ProductListScreen}
           options={{
-            title: 'Канцтовары',
+            title: 'Аптека',
             headerRight: () => <HeaderCartButton />,
           }}
         />
@@ -24,7 +24,7 @@ export default function RootNavigator() {
           name="ProductDetails"
           component={ProductDetailsScreen}
           options={{
-            title: 'Товар',
+            title: 'О препарате',
             headerRight: () => <HeaderCartButton />,
           }}
         />

@@ -37,15 +37,7 @@ export default function CartScreen() {
           text: 'OK',
           onPress: () => {
             clear();
-            // Закрытие приложения — только Android.
-            // На iOS это ограничено политикой Apple.
-            try {
-              const RNExitApp = require('react-native-exit-app').default;
-              RNExitApp.exitApp();
-            } catch {
-              // библиотека не установлена — просто возвращаемся назад
-              navigation.popToTop();
-            }
+            navigation.popToTop();
           },
         },
       ],
@@ -72,11 +64,11 @@ export default function CartScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f6f8' },
+  container: { flex: 1, backgroundColor: '#f4f8f6' },
   list: { paddingVertical: 6 },
-  footer: { backgroundColor: '#fff', borderTopWidth: 1, borderTopColor: '#eee' },
+  footer: { backgroundColor: '#fff', borderTopWidth: 1, borderTopColor: '#e4eee8' },
   buyBtn: {
-    backgroundColor: '#43a047',
+    backgroundColor: '#087f5b',
     marginHorizontal: 16,
     marginBottom: 20,
     paddingVertical: 14,
