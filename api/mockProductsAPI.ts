@@ -1,18 +1,24 @@
-import data from '../mocks/products.json';
+import data from '../db.json';
 import { Product } from '../types/product';
 
 const DELAY_MS = 600;
 
-const delay = (ms: number) => new Promise<void>((res) => setTimeout(res, ms));
+const delay = (ms: number) =>
+  new Promise<void>((res) => setTimeout(res, ms));
 
-// Список всех товаров
+// Получение списка лекарств
 export async function fetchProducts(): Promise<Product[]> {
   await delay(DELAY_MS);
-  return data.stationery as Product[];
+  return data.drugs as Product[];
 }
 
-// Один товар по id (вернёт undefined, если не найден)
-export async function fetchProductById(id: string): Promise<Product | undefined> {
+// Получение одного лекарства по id
+export async function fetchProductById(
+  id: string
+): Promise<Product | undefined> {
   await delay(DELAY_MS);
-  return (data.stationery as Product[]).find((p) => p.id === id);
+
+  return (data.drugs as Product[]).find(
+    (drug) => String(drug.id) === id
+  );
 }

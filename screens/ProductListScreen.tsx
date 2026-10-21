@@ -43,7 +43,7 @@ export default function ProductListScreen() {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" color="#1e88e5" />
-        <Text style={styles.hint}>Загружаем каталог…</Text>
+        <Text style={styles.hint}>Загружаем каталог...</Text>
       </View>
     );
   }
@@ -59,13 +59,13 @@ export default function ProductListScreen() {
   return (
     <FlatList
       data={products}
-      keyExtractor={(p) => p.id}
+      keyExtractor={(p) => String(p.id)}
       contentContainerStyle={styles.list}
       renderItem={({ item }) => (
         <ProductListItem
           product={item}
           onPress={() =>
-            navigation.navigate('ProductDetails', { productId: item.id })
+           navigation.navigate('ProductDetails', { productId: String(item.id) })
           }
         />
       )}
