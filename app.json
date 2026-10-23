@@ -26,6 +26,9 @@
         "projectId": "7f6ec0a8-78af-4f99-b003-f5c4d843d1f3"
       }
     },
-    "owner": "vakhromeevae"
+    "owner": "vakhromeevae",
+    "plugins": [
+      "expo-notifications"
+    ]
   }
 }
