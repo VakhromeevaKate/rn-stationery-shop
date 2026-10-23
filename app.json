@@ -11,15 +11,27 @@
     },
     "android": {
       "adaptiveIcon": {
+        "package": "com.vakhromeevae.stationeryshop",
+        "googleServicesFile": "./google-services.json",
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.vakhromeevae.stationeryshop"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7f6ec0a8-78af-4f99-b003-f5c4d843d1f3"
+      }
+    },
+    "owner": "vakhromeevae",
+    "plugins": [
+      "expo-notifications"
+    ]
   }
 }
