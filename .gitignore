@@ -39,3 +39,7 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# with keys
+rn-stationery-shop-firebase-adminsdk-fbsvc-ea7cc661f7.json
+google-services.json
