@@ -21,11 +21,8 @@ npx expo install expo-auth-session expo-crypto expo-web-browser expo-secure-stor
   }
 }
 ```
-**Пересобрать development build** (схема не подхватится через hot reload):
-```bash
-npx expo run:android
-```
-## 4. `src/auth/authService.ts`
+
+## 4. `/auth/authService.ts`
 ```ts
 import * as SecureStore from 'expo-secure-store';
 
@@ -147,11 +144,12 @@ const styles = StyleSheet.create({
 ```
 ## 7. `App.tsx` — «гейт», с которого нельзя уйти
 ```tsx
+// Добавляем импорты
 import { ActivityIndicator, View } from 'react-native';
-import { AuthProvider, useAuth } from './src/auth/AuthContext';
-import AuthScreen from './src/screens/AuthScreen';
-import RootNavigator from './src/navigation/RootNavigator';
+import { AuthProvider, useAuth } from './auth/AuthContext';
+import AuthScreen from './screens/AuthScreen';
 
+// Добавляем функцию-"калитку"
 function Gate() {
   const { token, isLoading } = useAuth();
 
@@ -167,11 +165,15 @@ function Gate() {
   return token ? <RootNavigator /> : <AuthScreen />;
 }
 
+// Меняем возврат из App
 export default function App() {
   return (
-    <AuthProvider>
-      <Gate />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <StatusBar style="dark" />
+       <AuthProvider>
+        <Gate />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 ```

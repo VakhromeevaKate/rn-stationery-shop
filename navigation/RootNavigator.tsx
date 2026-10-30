@@ -5,6 +5,7 @@ import ProductListScreen from '../screens/ProductListScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 import CartScreen from '../screens/CartScreen';
 import HeaderCartButton from '../components/HeaderCartButton';
+import LogoutButton from '../components/LogoutButton';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -17,6 +18,7 @@ export default function RootNavigator() {
           component={ProductListScreen}
           options={{
             title: 'Канцтовары',
+            headerLeft: () => <LogoutButton />,
             headerRight: () => <HeaderCartButton />,
           }}
         />
@@ -25,6 +27,7 @@ export default function RootNavigator() {
           component={ProductDetailsScreen}
           options={{
             title: 'Товар',
+            headerLeft: () => <LogoutButton />,
             headerRight: () => <HeaderCartButton />,
           }}
         />
