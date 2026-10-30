@@ -6,6 +6,7 @@ import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 import CartScreen from '../screens/CartScreen';
 import HeaderCartButton from '../components/HeaderCartButton';
 import LogoutButton from '../components/LogoutButton';
+import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,8 +19,10 @@ export default function RootNavigator() {
           component={ProductListScreen}
           options={{
             title: 'Канцтовары',
-            headerLeft: () => <LogoutButton />,
-            headerRight: () => <HeaderCartButton />,
+            headerRight: () => <View style={{display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center'}}>
+              <LogoutButton />
+              <HeaderCartButton />
+            </View>,
           }}
         />
         <Stack.Screen
@@ -27,8 +30,10 @@ export default function RootNavigator() {
           component={ProductDetailsScreen}
           options={{
             title: 'Товар',
-            headerLeft: () => <LogoutButton />,
-            headerRight: () => <HeaderCartButton />,
+            headerRight: () => <View style={{display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center'}}>
+              <LogoutButton />
+              <HeaderCartButton />
+            </View>,
           }}
         />
         <Stack.Screen

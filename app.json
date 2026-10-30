@@ -4,7 +4,8 @@
     "slug": "stationery-shop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/colorful-pencils-concept-with-copy-space.jpg",
+    "backgroundColor": "transparent",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true
@@ -13,16 +14,20 @@
       "adaptiveIcon": {
         "package": "com.vakhromeevae.stationeryshop",
         "googleServicesFile": "./google-services.json",
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "backgroundColor": "#FFFFFF",
+        "foregroundImage": "./assets/colorful-pencils-no-background.png",
+        "backgroundImage": "./assets/colorful-pencils-concept-with-copy-space.jpg"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.vakhromeevae.stationeryshop"
     },
+    "splash": {
+      "image": "./assets/colorful-pencils-no-background.png",
+      "resizeMode": "cover",
+      "backgroundColor": "transparent"
+    },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/colorful-pencils-no-background.png"
     },
     "owner": "vakhromeevae",
     "scheme": "stationeryshop",
