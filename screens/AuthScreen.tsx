@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest, ResponseType } from 'expo-auth-session';
@@ -14,10 +14,11 @@ const discovery = {
 export default function AuthScreen() {
   const { signIn } = useAuth();
   const redirectUri = makeRedirectUri({ scheme: 'stationeryshop', path: 'auth' });
+  const [encMessage, setEncMessage] = useState<string | null>(null);
 
   const [request, response, promptAsync] = useAuthRequest(
     {
-      clientId: 'Ov23liiyoWifjYvSMtK4',
+      clientId: process.env.GITHUB_CLIENT_ID,
       scopes: ['read:user', 'user:email'],
       redirectUri,
       responseType: ResponseType.Code,
@@ -37,6 +38,7 @@ export default function AuthScreen() {
     <View style={styles.c}>
       <Text style={styles.t}>Магазин канцтоваров</Text>
       <Text style={styles.s}>Войдите, чтобы продолжить</Text>
+      <Text>Зашифрованное: {encMessage}</Text>
       <Pressable
         style={[styles.b, !request && styles.bd]}
         disabled={!request}
