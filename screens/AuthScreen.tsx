@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable, StyleSheet, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ActivityIndicator, Alert, TextInputChangeEvent } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest, ResponseType } from 'expo-auth-session';
 import { useAuth } from '../auth/AuthContext';
+import { usePreventScreenCapture } from 'expo-screen-capture';
+import { Credentials } from '../types/common';
+import { PasswordInput } from '../components/PasswordInput';
+import { SimpleInput } from '../components/SimpleInput';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -12,9 +16,19 @@ const discovery = {
 };
 
 export default function AuthScreen() {
+  usePreventScreenCapture();
+
   const { signIn } = useAuth();
   const redirectUri = makeRedirectUri({ scheme: 'stationeryshop', path: 'auth' });
-  const [encMessage, setEncMessage] = useState<string | null>(null);
+  const [credentionals, setCredentionals] = useState<Credentials | null>(null);
+
+  const hanleLoginWithCredentionals = () => {
+    if (credentionals?.login === 'admin' && credentionals?.password === 'password') {
+      signIn('mock-admin-token-12345');
+    } else {
+      Alert.alert('Неверный логин или пароль')
+    }
+  }
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -38,7 +52,18 @@ export default function AuthScreen() {
     <View style={styles.c}>
       <Text style={styles.t}>Магазин канцтоваров</Text>
       <Text style={styles.s}>Войдите, чтобы продолжить</Text>
-      <Text>Зашифрованное: {encMessage}</Text>
+      <SimpleInput placeholder='логин' value={credentionals?.login} onChangeText={(e) => setCredentionals({...credentionals, login: e})} />
+      <PasswordInput placeholder='пароль' value={credentionals?.password} onChangeText={(e) => setCredentionals({...credentionals, password: e})} />
+      <Pressable
+        style={[styles.bl, !request && styles.bd]}
+        disabled={!request}
+        onPress={() => hanleLoginWithCredentionals()}
+      >
+        {request ? <Text style={styles.bt}>Войти</Text> : <ActivityIndicator color="#fff" />}
+      </Pressable>
+      <Text style={styles.s}>
+        или
+      </Text>
       <Pressable
         style={[styles.b, !request && styles.bd]}
         disabled={!request}
@@ -53,8 +78,9 @@ export default function AuthScreen() {
 const styles = StyleSheet.create({
   c: { flex: 1, justifyContent: 'center', padding: 24, backgroundColor: '#fff' },
   t: { fontSize: 26, fontWeight: '800', textAlign: 'center', marginBottom: 8 },
-  s: { fontSize: 15, color: '#666', textAlign: 'center', marginBottom: 32 },
+  s: { fontSize: 15, color: '#666', textAlign: 'center', marginVertical: 16 },
   b: { backgroundColor: '#24292e', paddingVertical: 14, borderRadius: 12, alignItems: 'center' },
+  bl: { backgroundColor: 'blue', paddingVertical: 14, borderRadius: 12, alignItems: 'center' },
   bd: { opacity: 0.5 },
   bt: { color: '#fff', fontSize: 16, fontWeight: '700' },
 });
