@@ -37,7 +37,7 @@ export default function ProductDetailsScreen() {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#1e88e5" />
+        <ActivityIndicator size="large" color="#087f5b" />
       </View>
     );
   }
@@ -65,11 +65,11 @@ export default function ProductDetailsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, backgroundColor: '#f4f8f6' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   footer: { padding: 16, borderTopWidth: 1, borderTopColor: '#eee' },
   buyBtn: {
-    backgroundColor: '#1e88e5',
+    backgroundColor: '#087f5b',
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',

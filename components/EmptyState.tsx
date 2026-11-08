@@ -1,22 +1,3 @@
 import { View, Text, StyleSheet } from 'react-native';
-
-export default function EmptyState({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle?: string;
-}) {
-  return (
-    <View style={styles.wrap}>
-      <Text style={styles.title}>{title}</Text>
-      {subtitle && <Text style={styles.sub}>{subtitle}</Text>}
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  wrap: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
-  title: { fontSize: 18, fontWeight: '600', marginBottom: 8 },
-  sub: { fontSize: 14, color: '#666', textAlign: 'center' },
-});
+export default function EmptyState({title,subtitle}:{title:string;subtitle?:string}) { return <View style={styles.wrap}><Text style={styles.icon}>✚</Text><Text style={styles.title}>{title}</Text>{subtitle && <Text style={styles.sub}>{subtitle}</Text>}</View>; }
+const styles=StyleSheet.create({wrap:{flex:1,alignItems:'center',justifyContent:'center',padding:24,backgroundColor:'#f4f8f6'},icon:{fontSize:38,color:'#087f5b',marginBottom:12},title:{fontSize:18,fontWeight:'800',color:'#193d31',marginBottom:8},sub:{fontSize:14,color:'#667e73',textAlign:'center',lineHeight:20}});

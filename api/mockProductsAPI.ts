@@ -1,18 +1,20 @@
-import data from '../mocks/products.json';
+import data from '../mocks/drugs.json';
 import { Product } from '../types/product';
 
-const DELAY_MS = 600;
+const DELAY_MS = 250;
+const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+// В исходном db.json цены нет, поэтому для демонстрации корзины используем условную цену.
+const products: Product[] = data.drugs.map((drug) => ({
+  ...drug,
+  price: 80 + (Number(drug.id) % 40) * 15,
+}));
 
-const delay = (ms: number) => new Promise<void>((res) => setTimeout(res, ms));
-
-// Список всех товаров
 export async function fetchProducts(): Promise<Product[]> {
   await delay(DELAY_MS);
-  return data.stationery as Product[];
+  return products;
 }
 
-// Один товар по id (вернёт undefined, если не найден)
 export async function fetchProductById(id: string): Promise<Product | undefined> {
   await delay(DELAY_MS);
-  return (data.stationery as Product[]).find((p) => p.id === id);
+  return products.find((product) => product.id === id);
 }

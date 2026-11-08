@@ -1,33 +1,15 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Product } from '../types/product';
-
 export default function ProductDetailsCard({ product }: { product: Product }) {
-  return (
-    <ScrollView contentContainerStyle={styles.wrap}>
-      <Image source={{ uri: product.image_url }} style={styles.image} />
-      <Text style={styles.brand}>{product.brand}</Text>
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.category}>{product.category}</Text>
-      <Text style={styles.price}>{product.price} ₽</Text>
-      <Text style={styles.stock}>В наличии: {product.stock} шт.</Text>
-      <Text style={styles.desc}>{product.description}</Text>
-    </ScrollView>
-  );
+ return <ScrollView contentContainerStyle={styles.wrap}>
+  <View style={styles.illustration}><Text style={styles.bigIcon}>✚</Text><Text style={styles.illustrationText}>PHARMACY CARE</Text></View>
+  <Text style={styles.category}>{product.category}</Text><Text style={styles.name}>{product.name}</Text><Text style={styles.latin}>{product.latin_name}</Text>
+  <View style={styles.priceRow}><Text style={styles.price}>{product.price.toLocaleString('ru-RU')} ₽</Text><Text style={[styles.stock, product.stock <= 0 && styles.out]}>{product.stock > 0 ? `● В наличии: ${product.stock}` : 'Нет в наличии'}</Text></View>
+  {product.prescription_required && <View style={styles.warning}><Text style={styles.warningText}>Отпускается по рецепту</Text></View>}
+  <Text style={styles.heading}>О препарате</Text><Text style={styles.desc}>{product.description}</Text>
+  <View style={styles.details}><Info label="Действующее вещество" value={product.active_substance}/><Info label="Форма выпуска" value={product.form}/><Info label="Дозировка" value={product.dosage}/><Info label="Производитель" value={product.manufacturer}/><Info label="Категория" value={product.category}/></View>
+  <Text style={styles.disclaimer}>Информация приведена для ознакомления и не заменяет консультацию врача или инструкцию к препарату.</Text>
+ </ScrollView>;
 }
-
-const styles = StyleSheet.create({
-  wrap: { padding: 20, paddingBottom: 40 },
-  image: {
-    width: '100%',
-    height: 240,
-    borderRadius: 16,
-    backgroundColor: '#f2f2f2',
-    marginBottom: 16,
-  },
-  brand: { fontSize: 12, color: '#888', textTransform: 'uppercase' },
-  name: { fontSize: 22, fontWeight: '700', marginVertical: 6 },
-  category: { fontSize: 13, color: '#999', marginBottom: 12 },
-  price: { fontSize: 24, fontWeight: '800', color: '#1e88e5', marginBottom: 4 },
-  stock: { fontSize: 13, color: '#4caf50', marginBottom: 16 },
-  desc: { fontSize: 15, lineHeight: 22, color: '#333' },
-});
+function Info({label,value}:{label:string;value:string}) { return <View style={styles.infoRow}><Text style={styles.infoLabel}>{label}</Text><Text style={styles.infoValue}>{value}</Text></View>; }
+const styles=StyleSheet.create({wrap:{padding:18,paddingBottom:32,backgroundColor:'#f4f8f6'},illustration:{height:155,borderRadius:22,backgroundColor:'#e1f3eb',alignItems:'center',justifyContent:'center',marginBottom:20},bigIcon:{fontSize:64,color:'#087f5b',fontWeight:'300'},illustrationText:{fontSize:10,letterSpacing:3,fontWeight:'800',color:'#43846b'},category:{fontSize:12,color:'#087f5b',fontWeight:'800'},name:{fontSize:27,lineHeight:32,fontWeight:'800',color:'#173d30',marginTop:6},latin:{fontSize:14,color:'#7d9087',fontStyle:'italic',marginTop:4},priceRow:{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:18,marginBottom:14},price:{fontSize:26,fontWeight:'900',color:'#087f5b'},stock:{fontSize:11,color:'#16805d',fontWeight:'700'},out:{color:'#b54141'},warning:{backgroundColor:'#fff0db',padding:12,borderRadius:10,marginBottom:12},warningText:{color:'#94551d',fontWeight:'700'},heading:{fontSize:17,fontWeight:'800',color:'#173d30',marginTop:10,marginBottom:8},desc:{fontSize:14,lineHeight:21,color:'#536a60'},details:{backgroundColor:'#fff',borderRadius:15,paddingHorizontal:14,marginTop:20,borderWidth:1,borderColor:'#e4eee8'},infoRow:{paddingVertical:12,borderBottomWidth:1,borderBottomColor:'#edf2ef'},infoLabel:{fontSize:11,color:'#82948b',marginBottom:4},infoValue:{fontSize:14,color:'#24483a',fontWeight:'600'},disclaimer:{fontSize:11,lineHeight:16,color:'#82948b',marginTop:18}});

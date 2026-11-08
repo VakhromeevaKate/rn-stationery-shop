@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "stationery-shop",
-    "slug": "stationery-shop",
+    "name": "Аптека",
+    "slug": "pharmacy-catalog",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/colorful-pencils-concept-with-copy-space.jpg",
@@ -27,14 +27,13 @@
       "backgroundColor": "transparent"
     },
     "web": {
-      "favicon": "./assets/colorful-pencils-no-background.png"
+      "favicon": "./assets/favicon.png"
     },
     "owner": "vakhromeevae",
     "scheme": "stationeryshop",
     "plugins": [
       "expo-notifications",
       "expo-web-browser",
-      "expo-secure-store",
       "expo-secure-store"
     ]
   }
