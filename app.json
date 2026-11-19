@@ -3,6 +3,7 @@
     "name": "stationery-shop",
     "slug": "stationery-shop",
     "version": "1.0.0",
+    "scheme": "stationeryshop",
     "orientation": "portrait",
     "icon": "./assets/colorful-pencils-concept-with-copy-space.jpg",
     "backgroundColor": "transparent",
@@ -12,8 +13,6 @@
     },
     "android": {
       "adaptiveIcon": {
-        "package": "com.vakhromeevae.stationeryshop",
-        "googleServicesFile": "./google-services.json",
         "backgroundColor": "#FFFFFF",
         "foregroundImage": "./assets/colorful-pencils-no-background.png",
         "backgroundImage": "./assets/colorful-pencils-concept-with-copy-space.jpg"
@@ -27,14 +26,10 @@
       "backgroundColor": "transparent"
     },
     "web": {
-      "favicon": "./assets/colorful-pencils-no-background.png"
+      "favicon": "./assets/favicon.png"
     },
-    "owner": "vakhromeevae",
-    "scheme": "stationeryshop",
     "plugins": [
-      "expo-notifications",
       "expo-web-browser",
-      "expo-secure-store",
       "expo-secure-store"
     ]
   }

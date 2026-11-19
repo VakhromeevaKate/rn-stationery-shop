@@ -1,16 +1,20 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from 'react-native';
 import { RootStackParamList } from '../types/navigation';
 import ProductListScreen from '../screens/ProductListScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 import CartScreen from '../screens/CartScreen';
 import HeaderCartButton from '../components/HeaderCartButton';
-import LogoutButton from '../components/LogoutButton';
-import { View } from 'react-native';
+import { useAuth } from '../auth/AuthContext';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+// Показывается только для авторизованного пользователя
+// (гейт по токену — в App.tsx: token ? RootNavigator : AuthScreen).
 export default function RootNavigator() {
+  const { signOut } = useAuth();
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -19,10 +23,8 @@ export default function RootNavigator() {
           component={ProductListScreen}
           options={{
             title: 'Канцтовары',
-            headerRight: () => <View style={{display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center'}}>
-              <LogoutButton />
-              <HeaderCartButton />
-            </View>,
+            headerRight: () => <HeaderCartButton />,
+            headerLeft: () => <Button title="Выйти" onPress={() => signOut()} />,
           }}
         />
         <Stack.Screen
@@ -30,10 +32,7 @@ export default function RootNavigator() {
           component={ProductDetailsScreen}
           options={{
             title: 'Товар',
-            headerRight: () => <View style={{display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center'}}>
-              <LogoutButton />
-              <HeaderCartButton />
-            </View>,
+            headerRight: () => <HeaderCartButton />,
           }}
         />
         <Stack.Screen
